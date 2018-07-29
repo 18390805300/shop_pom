@@ -1,0 +1,19 @@
+spring:
+  thymeleaf:
+    mode: HTML5t
+  servlet:
+    multipart:
+      max-file-size: 10MB
+
+fdfs:
+  pool:
+    jmx-enabled: false
+  so-timeout: 10000
+  connect-timeout: 10000
+  tracker-list: 192.168.153.128:22122
+  thumb-image:
+    height: 100
+    width: 100
+  host: http://192.168.153.128/
+
+

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <base th:href="${#request.getContextPath() + '/'}"/>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script src="js/jquery-1.9.1.min.js"></script>
+
+    <!-- bootstrap -->
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>商品管理</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 col-sm-3 col-sm-offset-9">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                添加商品
+            </button>
+            &nbsp;&nbsp;
+            <button type="button" class="btn btn-danger">删除商品</button>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 20px">
+        <table class="table table-hover">
+            <tr>
+                <td><input type="checkbox" name="checkall"/>全选</td>
+                <td>标题</td>
+                <td>图片</td>
+                <td>价格</td>
+                <td>库存</td>
+                <td>简介</td>
+                <td>操作</td>
+            </tr>
+            <tr th:each="good : ${goods}">
+                <td><input type="checkbox" name="checked"/></td>
+                <td th:text="${good.title}"></td>
+                <td><img style="width: 60px" th:src="|/goods/findImg?imgpath=${good.gimage}|"></td>
+                <td th:text="${good.price}"></td>
+                <td th:text="${good.gcount}"></td>
+                <td th:text="${good.ginfo}"></td>
+                <td><a>修改</a></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col">
+            <!-- 分页导航 -->
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                    <li><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#">2 </a></li>
+                    <li><a href="#">3 </a></li>
+                    <li><a href="#">4 </a></li>
+                    <li><a href="#">5 </a></li>
+                    <li>
+                        <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+                <form action="/goods/addGoods" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <input type="text" class="form-control" id="exampleInputEmail1" placeholder="填写商品标题"
+                               name="title">
+                        <br>
+                        <p class="help-block">请上传商品相关图片.</p>
+                        <input type="file" name="file" id="exampleInputFile">
+                        <br>
+                        <input type="text" class="form-control" id="exampleInputCount" placeholder="商品库存" name="gcount">
+                        <br>
+                        <input type="text" class="form-control" id="exampleInputOldPrice" placeholder="原价" name="allprice">
+                        <br>
+                        <input type="text" class="form-control" id="exampleInputPrice" placeholder="现价" name="price">
+                        <br>
+                        <input type="text" class="form-control" id="exampleInputInfo" placeholder="商品描述" name="ginfo">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="submit" class="btn btn-primary">添加</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

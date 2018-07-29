@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 设置dubbo的名称 -->
+    <dubbo:application name="dubbo-consumer"/>
+
+    <!-- 指定注册的服务中心 -->
+    <dubbo:registry protocol="zookeeper" address="192.168.153.128:2181"/>
+
+    <!-- 暴露服务 -->
+    <dubbo:reference interface="com.lbl.service.IUserService" id="userService" timeout="20000"/>
+    <dubbo:reference interface="com.lbl.service.IGoodsService" id="goodsService" timeout="20000"/>
+    <dubbo:reference interface="com.lbl.service.IClassifyService" id="classifyService" timeout="20000"/>
+    <dubbo:reference interface="com.lbl.service.ISolrService" id="solrService" timeout="20000"/>
+
+</beans>
